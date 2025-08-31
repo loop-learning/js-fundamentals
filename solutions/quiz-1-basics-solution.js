@@ -3,77 +3,60 @@
 // Topics: Variables, Data Types, Arrays, Objects, Strings
 // ========================================
 
-console.log("=== QUIZ 1 SOLUTIONS ===\n");
+// SECTION A: Variables and Data Types - SOLUTIONS
+// ========================================
 
-// SECTION A: Variables and Data Types
-console.log("SECTION A SOLUTIONS: VARIABLES AND DATA TYPES\n");
+// Question 1: Variable Declaration Practice - SOLUTION
+let studentName = "John Doe"; // Using let allows reassignment
+const schoolId = "SCH001"; // Using const prevents reassignment
 
-console.log("1. Variable Declaration and Types - SOLUTION:");
-// a) Create a variable 'studentName' that can be reassigned
-let studentName = "John Doe"; // Using 'let' allows reassignment
-studentName = "Jane Smith"; // This works
+// studentName can be changed
+studentName = "Jane Smith"; 
 
-// b) Create a constant 'schoolId' that cannot be reassigned  
-const schoolId = "SCH001"; // Using 'const' prevents reassignment
-// schoolId = "SCH002"; // This would cause an error
+// schoolId cannot be changed - this would cause error:
+// schoolId = "SCH002"; // TypeError: Assignment to constant variable
 
-// c) typeof results:
-console.log("typeof 'Hello World':", typeof "Hello World");     // "string"
-console.log("typeof 42:", typeof 42);                           // "number"
-console.log("typeof true:", typeof true);                       // "boolean"
-console.log("typeof null:", typeof null);                       // "object" (JavaScript quirk)
-console.log("typeof undefined:", typeof undefined);             // "undefined"
-console.log();
+// typeof results:
+// typeof 'Hello World' → "string"
+// typeof 42 → "number" 
+// typeof true → "boolean"
+// typeof null → "object" (JavaScript quirk)
+// typeof undefined → "undefined"
 
-console.log("2. Fix the Error - SOLUTION:");
-console.log("The 'const score = 85; score = 90;' causes an error because:");
-console.log("- const variables cannot be reassigned after declaration");
-console.log("- let variables CAN be reassigned");
-console.log("- Solution: Use 'let' if you need to reassign the variable");
-let correctScore = 85;
-correctScore = 90; // This works
-console.log("Corrected score:", correctScore);
-console.log();
+// Question 2: Fix the Error - SOLUTION
+// Problem: const variables cannot be reassigned
+// Solution: Use let if you need to change the value
+let score = 85; // Use let instead of const
+score = 90; // Now this works
 
-// SECTION B: Arrays
-console.log("SECTION B SOLUTIONS: ARRAYS\n");
+// ========================================
+// SECTION B: Arrays - SOLUTIONS
+// ========================================
 
-console.log("3. Array Operations - SOLUTION:");
+// Question 3: Array Operations - SOLUTION
 let fruits = ['apple', 'banana', 'orange'];
-console.log("Initial array:", fruits);
 
-// a) Add 'mango' to the end
-fruits.push('mango');
-console.log("After push('mango'):", fruits);
+// Step by step operations:
+fruits.push('mango');        // ['apple', 'banana', 'orange', 'mango']
+fruits.shift();              // ['banana', 'orange', 'mango'] 
+fruits.unshift('grapes');    // ['grapes', 'banana', 'orange', 'mango']
 
-// b) Remove the first item
-fruits.shift();
-console.log("After shift():", fruits);
+// Final result: ['grapes', 'banana', 'orange', 'mango']
+// Length: 4
 
-// c) Add 'grapes' to the beginning
-fruits.unshift('grapes');
-console.log("After unshift('grapes'):", fruits);
-
-// d) Final array and length
-console.log("Final array:", fruits);
-console.log("Final length:", fruits.length);
-console.log();
-
-console.log("4. Fix the Loop - SOLUTION:");
-console.log("Problem: i <= colors.length causes index out of bounds");
-console.log("Solution: Change <= to <");
+// Question 4: Fix the Loop Bug - SOLUTION
+// Problem: i <= colors.length causes index out of bounds
+// Solution: Change <= to < 
 let colors = ['red', 'green', 'blue'];
-console.log("Fixed loop:");
-for(let i = 0; i < colors.length; i++) { // Changed <= to <
-    console.log("Color " + i + ":", colors[i]);
+for(let i = 0; i < colors.length; i++) { // Fixed: <= changed to <
+    // This now works correctly without undefined values
 }
-console.log();
 
-// SECTION C: Objects
-console.log("SECTION C SOLUTIONS: OBJECTS\n");
+// ========================================
+// SECTION C: Objects - SOLUTIONS
+// ========================================
 
-console.log("5. Object Creation and Access - SOLUTION:");
-// Create movie object
+// Question 5: Object Creation and Manipulation - SOLUTION
 let movie = {
     title: 'The Matrix',
     year: 1999,
@@ -81,59 +64,48 @@ let movie = {
     isWatched: false
 };
 
-// a) Access title using dot notation
-console.log("Title (dot notation):", movie.title);
+// Access using dot notation
+let movieTitle = movie.title; // 'The Matrix'
 
-// b) Access year using bracket notation
-console.log("Year (bracket notation):", movie['year']);
+// Access using bracket notation
+let movieYear = movie['year']; // 1999
 
-// c) Update isWatched to true
+// Update property
 movie.isWatched = true;
-console.log("Updated isWatched:", movie.isWatched);
 
-// d) Add director property
+// Add new property
 movie.director = 'Wachowski';
-console.log("Complete movie object:", movie);
-console.log();
 
-console.log("6. Object Methods - SOLUTION:");
+// Final object has all properties including new director
+
+// Question 6: Object Utility Methods - SOLUTION
 let user = { name: 'John', age: 30, city: 'NYC' };
-console.log("Object.keys(user):", Object.keys(user));           // ['name', 'age', 'city']
-console.log("Object.values(user):", Object.values(user));       // ['John', 30, 'NYC']
-console.log("Object.entries(user):", Object.entries(user));     // [['name','John'], ['age',30], ['city','NYC']]
-console.log();
 
-// SECTION D: Strings
-console.log("SECTION D SOLUTIONS: STRINGS\n");
+// Object.keys(user) returns: ['name', 'age', 'city']
+// Object.values(user) returns: ['John', 30, 'NYC']
+// Object.entries(user) returns: [['name','John'], ['age',30], ['city','NYC']]
 
-console.log("7. String Methods - SOLUTION:");
+// ========================================
+// SECTION D: Strings - SOLUTIONS
+// ========================================
+
+// Question 7: String Method Practice - SOLUTION
 let message = '  Hello JavaScript World!  ';
-console.log("Original:", `"${message}"`);
-console.log("a) message.length:", message.length);                    // 26 (includes spaces)
-console.log("b) message.trim().toUpperCase():", message.trim().toUpperCase());  // "HELLO JAVASCRIPT WORLD!"
-console.log("c) message.includes('JavaScript'):", message.includes('JavaScript')); // true
-console.log("d) message.indexOf('World'):", message.indexOf('World')); // 19
-console.log("e) message.slice(7, 17):", message.slice(7, 17));        // "JavaScript"
-console.log();
 
-console.log("8. String Validation - SOLUTION:");
+// Results:
+// message.length → 26 (includes spaces)
+// message.trim().toUpperCase() → "HELLO JAVASCRIPT WORLD!"
+// message.includes('JavaScript') → true
+// message.indexOf('World') → 19
+// message.slice(7, 17) → "JavaScript"
+
+// Question 8: String Validation Challenge - SOLUTION
 let email = 'user@example.com';
-console.log("Email to validate:", email);
 
-// a) Check if it contains '@' symbol
-let hasAt = email.includes('@');
-console.log("Contains '@':", hasAt);
+// Individual checks:
+let hasAtSymbol = email.includes('@');        // true
+let endsDotCom = email.endsWith('.com');      // true  
+let isLongEnough = email.length >= 5;        // true
 
-// b) Check if it ends with '.com'
-let endsDotCom = email.endsWith('.com');
-console.log("Ends with '.com':", endsDotCom);
-
-// c) Check if it's at least 5 characters long
-let isLongEnough = email.length >= 5;
-console.log("At least 5 characters:", isLongEnough);
-
-// All-in-one validation
-let isValidEmail = hasAt && endsDotCom && isLongEnough;
-console.log("Is valid email:", isValidEmail);
-
-console.log("\n=== END OF QUIZ 1 SOLUTIONS ===");
+// Combined validation:
+let isValidEmail = hasAtSymbol && endsDotCom && isLongEnough; // true

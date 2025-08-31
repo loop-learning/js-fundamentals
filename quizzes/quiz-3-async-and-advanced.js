@@ -3,103 +3,106 @@
 // Topics: Promises, Async/Await, ES6+ Features, Modules, Error Handling, Debugging
 // ========================================
 
-console.log("=== ASYNC PROGRAMMING AND ADVANCED FEATURES QUIZ ===\n");
+// SECTION A: Promises
+// ========================================
 
-// SECTION A: Promises (Questions 1-2)
-console.log("SECTION A: PROMISES\n");
+// Question 1: Promise Creation
+// Create a promise that:
+// - Resolves with 'Data loaded successfully' after 1 second
+// - Has a 30% chance to reject with 'Loading failed'
+// - Handle both success and error cases with .then() and .catch()
 
-console.log("1. Promise Creation");
-console.log("   Create a promise that:");
-console.log("   - Resolves with 'Data loaded successfully' after 1 second");
-console.log("   - Has a random chance to reject with 'Loading failed'");
-console.log("   - Handle both success and error cases with .then() and .catch()\n");
+// Question 2: Promise Chain Understanding
+// Predict what this code will output:
+// Promise.resolve('Start')
+//   .then(result => result + ' -> Step 1')
+//   .then(result => result + ' -> Step 2')
+//   .then(result => console.log(result));
 
-console.log("2. Promise Chain Analysis");
-console.log("   What will this code output?");
-console.log("   Promise.resolve('Start')");
-console.log("     .then(result => result + ' -> Step 1')");
-console.log("     .then(result => result + ' -> Step 2')");
-console.log("     .then(result => console.log(result));");
-console.log("   Predict the final output\n");
+// ========================================
+// SECTION B: Async/Await
+// ========================================
 
-// SECTION B: Async/Await (Questions 3-4)
-console.log("SECTION B: ASYNC/AWAIT\n");
+// Question 3: Promise to Async/Await Conversion
+// Convert this promise-based code to use async/await:
+// function fetchUserData() {
+//   return fetch('https://api.example.com/user')
+//     .then(response => response.json())
+//     .then(data => console.log(data))
+//     .catch(error => console.log('Error:', error));
+// }
 
-console.log("3. Async Function Creation");
-console.log("   Convert this promise-based code to async/await:");
-console.log("   function fetchUserData() {");
-console.log("     return fetch('https://api.example.com/user')");
-console.log("       .then(response => response.json())");
-console.log("       .then(data => console.log(data))");
-console.log("       .catch(error => console.log('Error:', error));");
-console.log("   }\n");
+// Question 4: Async Error Handling
+// Write an async function that:
+// - Simulates an API call that might fail (70% success rate)
+// - Uses try-catch for error handling
+// - Returns appropriate success or error messages
+// - Includes a 1-2 second delay
 
-console.log("4. Error Handling with Async/Await");
-console.log("   Write an async function that:");
-console.log("   - Simulates an API call that might fail");
-console.log("   - Uses try-catch for error handling");
-console.log("   - Returns different messages for success and failure\n");
+// ========================================
+// SECTION C: ES6+ Features
+// ========================================
 
-// SECTION C: ES6+ Features (Questions 5-6)
-console.log("SECTION C: ES6+ FEATURES\n");
+// Question 5: Destructuring and Template Literals
+// Given: let user = { name: 'Sarah', age: 28, city: 'Boston', job: 'Developer' };
+// - Use destructuring to extract name, age, and city
+// - Use template literal to create: 'Hi, I'm Sarah, 28 years old from Boston'
+// - Try destructuring with default values for missing properties
 
-console.log("5. Template Literals and Destructuring");
-console.log("   let user = { name: 'Sarah', age: 28, city: 'Boston', job: 'Developer' };");
-console.log("   a) Use destructuring to extract name, age, and city");
-console.log("   b) Use template literal to create: 'Hi, I'm Sarah, 28 years old from Boston'");
-console.log("   c) Destructure with default values for missing properties\n");
+// Question 6: Spread Operator and Default Parameters
+// - Combine arrays [1, 2] and [3, 4, 5] using spread operator
+// - Create function greet(name = 'Guest', greeting = 'Hello') with default parameters
+// - Test the function with: greet(), greet('John'), greet('Jane', 'Hi')
 
-console.log("6. Spread Operator and Default Parameters");
-console.log("   a) Combine these arrays: [1, 2] and [3, 4, 5] using spread operator");
-console.log("   b) Create a function greet(name = 'Guest', greeting = 'Hello') using default parameters");
-console.log("   c) Test the function with: greet(), greet('John'), greet('Jane', 'Hi')\n");
+// ========================================
+// SECTION D: Modules
+// ========================================
 
-// SECTION D: Modules and Error Handling (Questions 7-8)
-console.log("SECTION D: MODULES AND ERROR HANDLING\n");
+// Question 7: Module Import/Export Understanding
+// Given these module files:
+// 
+// math.js:
+// export const add = (a, b) => a + b;
+// export const multiply = (a, b) => a * b;
+// 
+// greet.js:
+// const greet = (name) => `Hello ${name}`;
+// export default greet;
+// 
+// Write the correct import statements to use both modules in main.js
 
-console.log("7. Module Understanding");
-console.log("   Given these module files:");
-console.log("   // math.js");
-console.log("   export const add = (a, b) => a + b;");
-console.log("   export const multiply = (a, b) => a * b;");
-console.log("   ");
-console.log("   // greet.js");
-console.log("   const greet = (name) => `Hello ${name}`;");
-console.log("   export default greet;");
-console.log("   ");
-console.log("   Write the import statements to use both modules in main.js\n");
+// ========================================
+// SECTION E: Error Handling
+// ========================================
 
-console.log("8. Error Handling Scenarios");
-console.log("   Write try-catch blocks for these scenarios:");
-console.log("   a) Calling a function that doesn't exist");
-console.log("   b) Parsing invalid JSON: JSON.parse('invalid json')");
-console.log("   c) Accessing property of null: null.property");
-console.log("   Handle each error appropriately\n");
+// Question 8: Try-Catch Scenarios
+// Write try-catch blocks to handle these errors:
+// - Calling a function that doesn't exist
+// - Parsing invalid JSON: JSON.parse('invalid json')
+// - Accessing property of null: null.property
+// Handle each error with appropriate error messages
 
-// SECTION E: Debugging (Questions 9-10)
-console.log("SECTION E: DEBUGGING\n");
+// ========================================
+// SECTION F: Debugging
+// ========================================
 
-console.log("9. Type Checking and Conversion");
-console.log("   Predict the typeof and value for:");
-console.log("   a) typeof '5' + 2");
-console.log("   b) typeof (5 + '2')");
-console.log("   c) typeof Number('123')");
-console.log("   d) typeof Boolean('')");
-console.log("   e) typeof undefined\n");
+// Question 9: Type Checking Challenge
+// Predict the typeof result for these expressions:
+// - typeof '5' + 2
+// - typeof (5 + '2')
+// - typeof Number('123')
+// - typeof Boolean('')
+// - typeof undefined
 
-console.log("10. Debugging Challenge");
-console.log("    Find and fix the bugs in this code:");
-console.log("    function processData(arr) {");
-console.log("        let result = [];");
-console.log("        for(let i = 0; i <= arr.length; i++) {");
-console.log("            if(arr[i] > 10) {");
-console.log("                result.push(arr[i] * 2);");
-console.log("            }");
-console.log("        }");
-console.log("        return result;");
-console.log("    }");
-console.log("    What's wrong and how do you fix it?\n");
-
-console.log("=== END OF QUIZ 3 ===");
-console.log("Total: 10 questions covering Promises, Async/Await, ES6+, Modules, Error Handling, and Debugging");
-console.log("Check your answers in the solutions file!");
+// Question 10: Bug Hunting
+// Find and fix the bugs in this function:
+// function processData(arr) {
+//     let result = [];
+//     for(let i = 0; i <= arr.length; i++) {
+//         if(arr[i] > 10) {
+//             result.push(arr[i] * 2);
+//         }
+//     }
+//     return result;
+// }
+// What issues do you see and how would you fix them?

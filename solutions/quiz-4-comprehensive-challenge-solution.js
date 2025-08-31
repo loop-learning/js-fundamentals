@@ -1,13 +1,11 @@
 // ========================================
 // QUIZ 4 SOLUTIONS: COMPREHENSIVE JAVASCRIPT CHALLENGE
-// Mixed topics: Real-world scenarios combining all concepts
+// Real-world scenarios combining all JavaScript concepts
 // ========================================
 
-console.log("=== COMPREHENSIVE JAVASCRIPT CHALLENGE SOLUTIONS ===\n");
+// Challenge 1: Student Management System - SOLUTION
 
-console.log("1. Student Management System - SOLUTION:");
-
-// Student object constructor/class approach
+// Student object structure
 function createStudent(name, age) {
     return {
         name: name,
@@ -17,7 +15,7 @@ function createStudent(name, age) {
     };
 }
 
-// Functions for student management
+// Add grade to student
 function addGrade(student, grade) {
     if (grade >= 0 && grade <= 100) {
         student.grades.push(grade);
@@ -26,12 +24,14 @@ function addGrade(student, grade) {
     return false;
 }
 
+// Calculate average grade
 function calculateAverage(student) {
     if (student.grades.length === 0) return 0;
     const sum = student.grades.reduce((acc, grade) => acc + grade, 0);
     return sum / student.grades.length;
 }
 
+// Check if student is passing
 function isPassing(student) {
     return calculateAverage(student) >= 70;
 }
@@ -42,16 +42,11 @@ addGrade(alice, 85);
 addGrade(alice, 92);
 addGrade(alice, 78);
 addGrade(alice, 88);
+// Average: 85.75, Status: Passing
 
-console.log("Student:", alice.name);
-console.log("Grades:", alice.grades);
-console.log("Average:", calculateAverage(alice).toFixed(1));
-console.log("Is passing:", isPassing(alice));
-console.log();
+// Challenge 2: E-commerce Shopping Cart - SOLUTION
 
-console.log("2. E-commerce Shopping Cart - SOLUTION:");
-
-// Product objects
+// Product definitions
 const products = [
     { id: 1, name: 'Laptop', price: 899, inStock: true },
     { id: 2, name: 'Mouse', price: 25, inStock: true },
@@ -67,7 +62,7 @@ class ShoppingCart {
     addToCart(productId, quantity = 1) {
         const product = products.find(p => p.id === productId);
         if (!product) return { success: false, message: 'Product not found' };
-        if (!product.inStock) return { success: false, message: 'Product out of stock' };
+        if (!product.inStock) return { success: false, message: 'Out of stock' };
         
         const existingItem = this.items.find(item => item.id === productId);
         if (existingItem) {
@@ -87,7 +82,7 @@ class ShoppingCart {
             return total + (item.price * item.quantity);
         }, 0);
         
-        // Apply 10% discount if total > $100
+        // 10% discount if total > $100
         const discount = subtotal > 100 ? subtotal * 0.1 : 0;
         return {
             subtotal: subtotal,
@@ -97,27 +92,18 @@ class ShoppingCart {
     }
 }
 
-// Test the shopping cart
-const cart = new ShoppingCart();
-console.log("Adding laptop:", cart.addToCart(1));
-console.log("Adding mouse:", cart.addToCart(2));
-console.log("Adding keyboard:", cart.addToCart(3));
-
-const totals = cart.calculateTotal();
-console.log("Cart totals:", totals);
-console.log();
-
-console.log("3. Weather Data Processor - SOLUTION:");
+// Challenge 3: Weather Data Analyzer - SOLUTION
 
 const temperatures = [22, 28, 31, 19, 25, 33, 27];
 
-// Weather analysis functions
 function findHighestTemp(temps) {
-    return Math.max(...temps.filter(temp => temp !== null && temp !== undefined));
+    const validTemps = temps.filter(temp => temp !== null && temp !== undefined);
+    return Math.max(...validTemps);
 }
 
 function findLowestTemp(temps) {
-    return Math.min(...temps.filter(temp => temp !== null && temp !== undefined));
+    const validTemps = temps.filter(temp => temp !== null && temp !== undefined);
+    return Math.min(...validTemps);
 }
 
 function calculateAverageTemp(temps) {
@@ -140,91 +126,26 @@ function categorizeTemperatures(temps) {
     });
 }
 
-console.log("Temperature data:", temperatures);
-console.log("Highest temperature:", findHighestTemp(temperatures) + "°C");
-console.log("Lowest temperature:", findLowestTemp(temperatures) + "°C");
-console.log("Average temperature:", calculateAverageTemp(temperatures).toFixed(1) + "°C");
-console.log("Daily categories:", categorizeTemperatures(temperatures));
-console.log();
-
-console.log("4. User Authentication System - SOLUTION:");
-
-// User database
-const userDatabase = [
-    { username: 'admin', password: 'admin123', role: 'admin', isActive: true, loginAttempts: 0 },
-    { username: 'user1', password: 'password123', role: 'user', isActive: true, loginAttempts: 0 },
-    { username: 'guest', password: 'guest123', role: 'guest', isActive: true, loginAttempts: 0 }
-];
-
-// Authentication system
-class AuthSystem {
-    constructor() {
-        this.maxAttempts = 3;
-    }
-    
-    validatePassword(password) {
-        if (password.length < 8) return { valid: false, message: 'Password must be at least 8 characters' };
-        if (!/\d/.test(password)) return { valid: false, message: 'Password must contain at least one number' };
-        if (!/[a-zA-Z]/.test(password)) return { valid: false, message: 'Password must contain at least one letter' };
-        return { valid: true, message: 'Password is valid' };
-    }
-    
-    login(username, password) {
-        const user = userDatabase.find(u => u.username === username);
-        
-        if (!user) return { success: false, message: 'User not found' };
-        if (!user.isActive) return { success: false, message: 'Account is locked' };
-        if (user.loginAttempts >= this.maxAttempts) {
-            user.isActive = false;
-            return { success: false, message: 'Account locked due to too many failed attempts' };
-        }
-        
-        if (user.password === password) {
-            user.loginAttempts = 0; // Reset on successful login
-            return { 
-                success: true, 
-                message: 'Login successful', 
-                user: { username: user.username, role: user.role } 
-            };
-        } else {
-            user.loginAttempts++;
-            return { 
-                success: false, 
-                message: `Invalid password. ${this.maxAttempts - user.loginAttempts} attempts remaining.` 
-            };
-        }
-    }
-    
-    checkAccess(user, requiredRole) {
-        const roleHierarchy = { admin: 3, user: 2, guest: 1 };
-        return roleHierarchy[user.role] >= roleHierarchy[requiredRole];
-    }
-}
-
-// Test authentication
-const auth = new AuthSystem();
-console.log("Password validation:", auth.validatePassword('weak'));
-console.log("Password validation:", auth.validatePassword('strong123'));
-console.log("Login test:", auth.login('admin', 'admin123'));
-console.log();
-
-console.log("5. Async Data Fetcher Simulation - SOLUTION:");
+// Challenge 4: Async Data Fetcher with Retry Logic - SOLUTION
 
 class DataFetcher {
     constructor() {
         this.maxRetries = 3;
     }
     
-    // Simulate API call with random delay and failure chance
+    // Simulate API call with random delay and failure
     simulateApiCall() {
         return new Promise((resolve, reject) => {
             const delay = Math.random() * 2000 + 1000; // 1-3 seconds
             
             setTimeout(() => {
                 if (Math.random() > 0.3) { // 70% success rate
-                    resolve({ data: 'API data retrieved successfully', timestamp: new Date().toISOString() });
+                    resolve({ 
+                        data: 'API data retrieved', 
+                        timestamp: new Date().toISOString() 
+                    });
                 } else {
-                    reject(new Error('Network error occurred'));
+                    reject(new Error('Network error'));
                 }
             }, delay);
         });
@@ -236,8 +157,6 @@ class DataFetcher {
         while (attempts < this.maxRetries) {
             try {
                 attempts++;
-                console.log(`Attempt ${attempts}/${this.maxRetries}...`);
-                
                 const data = await this.simulateApiCall();
                 return {
                     success: true,
@@ -246,8 +165,6 @@ class DataFetcher {
                     attempts: attempts
                 };
             } catch (error) {
-                console.log(`Attempt ${attempts} failed: ${error.message}`);
-                
                 if (attempts >= this.maxRetries) {
                     return {
                         success: false,
@@ -256,7 +173,6 @@ class DataFetcher {
                         attempts: attempts
                     };
                 }
-                
                 // Wait before retry
                 await new Promise(resolve => setTimeout(resolve, 1000));
             }
@@ -264,15 +180,7 @@ class DataFetcher {
     }
 }
 
-// Test data fetcher
-const fetcher = new DataFetcher();
-console.log("Testing data fetcher with retry mechanism:");
-fetcher.fetchWithRetry().then(result => {
-    console.log("Final result:", result);
-});
-console.log();
-
-console.log("6. Task Management Application - SOLUTION:");
+// Challenge 5: Task Management Application - SOLUTION
 
 class TaskManager {
     constructor() {
@@ -310,8 +218,12 @@ class TaskManager {
     
     filterTasks(criteria) {
         return this.tasks.filter(task => {
-            if (criteria.completed !== undefined && task.completed !== criteria.completed) return false;
-            if (criteria.priority && task.priority !== criteria.priority) return false;
+            if (criteria.completed !== undefined && task.completed !== criteria.completed) {
+                return false;
+            }
+            if (criteria.priority && task.priority !== criteria.priority) {
+                return false;
+            }
             return true;
         });
     }
@@ -339,62 +251,68 @@ class TaskManager {
     }
 }
 
-// Test task manager
-const taskManager = new TaskManager();
-taskManager.addTask('Learn JavaScript', 'Complete JS fundamentals course', 'high', '2024-12-31');
-taskManager.addTask('Build portfolio', 'Create personal website', 'medium', '2024-11-15');
-taskManager.addTask('Practice coding', 'Solve daily coding challenges', 'low');
+// Challenge 6: User Authentication System - SOLUTION
 
-console.log("All tasks:");
-console.log(taskManager.exportTasks());
+const userDatabase = [
+    { username: 'admin', password: 'admin123', role: 'admin', isActive: true, loginAttempts: 0 },
+    { username: 'user1', password: 'password123', role: 'user', isActive: true, loginAttempts: 0 }
+];
 
-console.log("\nHigh priority tasks:");
-console.log(taskManager.filterTasks({ priority: 'high' }));
-console.log();
+class AuthSystem {
+    constructor() {
+        this.maxAttempts = 3;
+    }
+    
+    validatePassword(password) {
+        if (password.length < 8) {
+            return { valid: false, message: 'Password must be at least 8 characters' };
+        }
+        if (!/\d/.test(password)) {
+            return { valid: false, message: 'Password must contain at least one number' };
+        }
+        if (!/[a-zA-Z]/.test(password)) {
+            return { valid: false, message: 'Password must contain at least one letter' };
+        }
+        return { valid: true, message: 'Valid password' };
+    }
+    
+    login(username, password) {
+        const user = userDatabase.find(u => u.username === username);
+        
+        if (!user) return { success: false, message: 'User not found' };
+        if (!user.isActive) return { success: false, message: 'Account locked' };
+        
+        if (user.loginAttempts >= this.maxAttempts) {
+            user.isActive = false;
+            return { success: false, message: 'Account locked due to failed attempts' };
+        }
+        
+        if (user.password === password) {
+            user.loginAttempts = 0;
+            return { 
+                success: true, 
+                message: 'Login successful', 
+                user: { username: user.username, role: user.role } 
+            };
+        } else {
+            user.loginAttempts++;
+            return { 
+                success: false, 
+                message: `Invalid password. ${this.maxAttempts - user.loginAttempts} attempts remaining` 
+            };
+        }
+    }
+}
 
-console.log("7. Module Integration Challenge - SOLUTION:");
-console.log("Module structure for calculator system:");
-console.log();
+// Challenge 8: Error Handling and Debugging - SOLUTION
 
-console.log("// basic-operations.js");
-console.log("export const add = (a, b) => a + b;");
-console.log("export const subtract = (a, b) => a - b;");
-console.log("export const multiply = (a, b) => a * b;");
-console.log("export const divide = (a, b) => {");
-console.log("    if (b === 0) throw new Error('Division by zero');");
-console.log("    return a / b;");
-console.log("};");
-console.log();
+// Issues in original code:
+// 1. No error handling for fetch operations
+// 2. No null checks for user properties  
+// 3. Assumes API responses have expected structure
+// 4. Individual user failures stop entire process
 
-console.log("// advanced-operations.js");
-console.log("export const power = (base, exponent) => Math.pow(base, exponent);");
-console.log("export const sqrt = (num) => {");
-console.log("    if (num < 0) throw new Error('Cannot calculate square root of negative number');");
-console.log("    return Math.sqrt(num);");
-console.log("};");
-console.log("export const factorial = (n) => {");
-console.log("    if (n < 0) throw new Error('Factorial of negative number not defined');");
-console.log("    if (n === 0 || n === 1) return 1;");
-console.log("    return n * factorial(n - 1);");
-console.log("};");
-console.log();
-
-console.log("// calculator.js (main)");
-console.log("import { add, subtract, multiply, divide } from './basic-operations.js';");
-console.log("import { power, sqrt, factorial } from './advanced-operations.js';");
-console.log("import { formatResult, validateInput, addToHistory } from './utilities.js';");
-console.log();
-
-console.log("8. Error Handling and Debugging Scenario - SOLUTION:");
-console.log("Issues identified in the code:");
-console.log("1. No error handling for fetch operations");
-console.log("2. No null checks for user object properties");
-console.log("3. Assumes all API responses have expected structure");
-console.log("4. No handling for individual user failures");
-console.log();
-
-console.log("Fixed version:");
-console.log(`
+// Fixed version:
 async function processUserData(users) {
     if (!Array.isArray(users)) {
         throw new Error('Users must be an array');
@@ -406,43 +324,37 @@ async function processUserData(users) {
         try {
             // Validate user object
             if (!user || !user.id || !user.name) {
-                console.warn('Skipping invalid user:', user);
+                // Skip invalid users
                 continue;
             }
             
-            // Fetch with error handling
-            const [profile, settings] = await Promise.allSettled([
+            // Use Promise.allSettled for parallel requests with error handling
+            const [profileResult, settingsResult] = await Promise.allSettled([
                 fetchProfile(user.id),
                 fetchSettings(user.id)
             ]);
             
-            // Handle profile response
-            const profileData = profile.status === 'fulfilled' 
-                ? profile.value?.data || {} 
+            // Safely extract data with fallbacks
+            const profileData = profileResult.status === 'fulfilled' 
+                ? profileResult.value?.data || {} 
                 : {};
             
-            // Handle settings response with safe property access
-            const theme = settings.status === 'fulfilled' 
-                ? settings.value?.preferences?.theme || 'default'
+            const theme = settingsResult.status === 'fulfilled' 
+                ? settingsResult.value?.preferences?.theme || 'default'
                 : 'default';
             
             results.push({
                 name: user.name ? user.name.toUpperCase() : 'UNKNOWN',
-                email: user.email || 'No email provided',
+                email: user.email || 'No email',
                 profile: profileData,
                 theme: theme
             });
             
         } catch (error) {
-            console.error('Error processing user ${user.id}:', error);
-            // Continue processing other users
+            // Log error but continue processing other users
+            // Individual failures don't stop the entire process
         }
     }
     
     return results;
 }
-`);
-
-console.log("\n=== END OF COMPREHENSIVE CHALLENGE SOLUTIONS ===");
-console.log("These solutions demonstrate integration of all JavaScript concepts!");
-console.log("Practice implementing the challenge projects to master real-world development.");
